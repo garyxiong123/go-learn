@@ -1,24 +1,20 @@
 package orm
 
 import (
+	"fmt"
+	"go-learn/db/basic"
 	"testing"
 )
-
-var person = &Person{
-	Name:  "gary",
-	Email: "502238415@qq.com",
-	Age:   33,
-}
 
 func Test_AutoMigrate(t *testing.T) {
 
 	// Get the first record ordered by primary key
-	Db.Migrator().DropTable(Person{})
-	Db.AutoMigrate(Person{})
+	Db.Migrator().DropTable(basic.Person{})
+	Db.AutoMigrate(basic.Person{})
 
 	tx := Db.Save(person)
-	println(tx)
-	println(person)
+	fmt.Println(tx)
+	fmt.Println(person)
 
 }
 
@@ -28,7 +24,7 @@ func Test_update(t *testing.T) {
 	Db.Updates(person)
 
 	//Db.Save(person)
-	println(person)
+	fmt.Println(person)
 
 }
 

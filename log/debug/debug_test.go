@@ -31,7 +31,12 @@ func HandleException1() {
 		return
 	}
 	fmt.Println(string(debug.Stack()))
-	fmt.Println(errs)≈
+	fmt.Println(errs)
+
+}
+
+//test in case of double trigger
+func Test_Debug_Stack_Trace_Job(t *testing.T) {
 
 }
 

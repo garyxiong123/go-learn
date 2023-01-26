@@ -2,11 +2,12 @@ package orm
 
 import (
 	"errors"
+	"fmt"
 	"gorm.io/gorm"
 	"testing"
 )
 
-func Test_create(t *testing.T) {
+func Test_basic(t *testing.T) {
 
 	Db.Save(Uuser)
 
@@ -25,6 +26,36 @@ func Test_create(t *testing.T) {
 	// check error ErrRecordNotFound
 	errors.Is(result.Error, gorm.ErrRecordNotFound)
 
+}
+
+func Test_double_create(t *testing.T) {
+	Db.Save(Uuser)
+	Db.Save(Uuser)
+	//sql input will be two  as no uniqe key
+}
+func Test_double_create_with_point(t *testing.T) {
+	Db.Save(&Uuser)
+	Db.Save(&Uuser)
+	//sql input will be two  as no uniqe key
+}
+
+func Test_double_create_with_unique_key_without_point(t *testing.T) {
+	Db.Save(person)
+	//error happen
+}
+
+func Test_double_create_with_unique_key(t *testing.T) {
+	Db.Save(&person)
+	fmt.Println(person)
+	person.Name = "mark"
+	Db.Save(&person)
+	//sql input will be two  as no uniqe key
+}
+func Test_create_update(t *testing.T) {
+	Db.Save(Uuser)
+	Uuser.Age = 31
+	Db.Save(Uuser)
+	//sql input must be one
 }
 
 func Test_create_with_selected_fields(t *testing.T) {

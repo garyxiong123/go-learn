@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	_ "go-learn/init1"
-	_ "go-learn/init2"
+	_ "go-learn/lifecycle/init1"
+	_ "go-learn/lifecycle/init2"
 	"os"
 )
 

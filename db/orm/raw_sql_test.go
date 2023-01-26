@@ -2,6 +2,7 @@ package orm
 
 import (
 	"database/sql"
+	"go-learn/db/basic"
 	"gorm.io/gorm"
 	"testing"
 	"time"
@@ -23,7 +24,7 @@ func Test_query_raw(t *testing.T) {
 	var age int
 	Db.Raw("SELECT SUM(age) FROM users WHERE role = ?", "admin").Scan(&age)
 
-	var users []User
+	var users []basic.User
 	Db.Raw("UPDATE users SET name = ? WHERE age = ? RETURNING id, name", "jinzhu", 20).Scan(&users)
 
 }
@@ -39,7 +40,7 @@ func Test_exec_raw(t *testing.T) {
 }
 
 func Test_Named_Argument_raw(t *testing.T) {
-	var user User
+	var user basic.User
 	var result3 Result
 	Db.Where("name1 = @name OR name2 = @name", sql.Named("name", "jinzhu")).Find(&user)
 	// SELECT * FROM `users` WHERE name1 = "jinzhu" OR name2 = "jinzhu"
@@ -87,7 +88,7 @@ func Test_sql_row(t *testing.T) {
 func Test_get_result_as_sql_row(t *testing.T) {
 
 	// Use GORM API build SQL
-	rows, err := Db.Model(&User{}).Where("name = ?", "gary").Select("name, age").Rows()
+	rows, err := Db.Model(&basic.User{}).Where("name = ?", "gary").Select("name, age").Rows()
 	println(err)
 	defer rows.Close()
 	for rows.Next() {
@@ -107,13 +108,13 @@ func Test_get_result_as_sql_row(t *testing.T) {
 }
 
 func Test_scan_sql_into_struct(t *testing.T) {
-	rows, err := Db.Model(&User{}).Where("name = ?", "gary").Select("name, age").Rows() // (*sql.Rows, error)
+	rows, err := Db.Model(&basic.User{}).Where("name = ?", "gary").Select("name, age").Rows() // (*sql.Rows, error)
 
 	println(err)
 
 	defer rows.Close()
 
-	var user User
+	var user basic.User
 	for rows.Next() {
 		// ScanRows scan a row into user
 		Db.ScanRows(rows, &user)

@@ -2,13 +2,14 @@ package orm
 
 import (
 	"errors"
+	"go-learn/db/basic"
 	"gorm.io/gorm"
 	"testing"
 )
 
 func Test_connect(t *testing.T) {
 
-	user := User{
+	user := basic.User{
 		Name: "gary",
 		Age:  32,
 	}

@@ -1,7 +1,7 @@
 package orm
 
 import (
-	"github.com/garyxiong123/go-learn/db/basic"
+	"go-learn/db/basic"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"os"
@@ -19,17 +19,22 @@ func TestMain(m *testing.M) {
 }
 
 var Db *gorm.DB
-var Uuser User
+var Uuser basic.User
+var person basic.Person
 
 func setup() {
 	initDbConnection()
 
 	intDbScheme()
 
-	Uuser = User{
+	Uuser = basic.User{
 		Name: "gary",
 		Age:  32,
 	}
+	person = basic.Person{
+		Age:   20,
+		Email: "50222@qq.com",
+		Name:  "gary"}
 
 }
 
@@ -40,11 +45,11 @@ func initDbConnection() {
 }
 
 func intDbScheme() {
-	Db.Migrator().DropTable(Person{})
-	Db.AutoMigrate(Person{})
+	Db.Migrator().DropTable(basic.Person{})
+	Db.AutoMigrate(basic.Person{})
 
-	Db.Migrator().DropTable(User{})
-	Db.AutoMigrate(User{})
+	Db.Migrator().DropTable(basic.User{})
+	Db.AutoMigrate(basic.User{})
 }
 
 func shutdown() {
