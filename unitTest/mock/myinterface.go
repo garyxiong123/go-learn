@@ -1,4 +1,4 @@
-package mockgen
+package mock
 
 func SayHello() {
 

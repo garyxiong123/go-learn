@@ -1,9 +1,10 @@
 package mock
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestMockGEN(t *testing.T) {
-	myMock := new(MyInterfaceMock)
-	myMock
+	//mockgen.SayHello()
 
 }
