@@ -1,4 +1,4 @@
-module github.com/garyxiong123/go-learn/web/go-zero/
+module github.com/garyxiong123/go-learn/web/go-zero
 
 go 1.15
 
