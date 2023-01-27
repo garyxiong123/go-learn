@@ -1,6 +1,6 @@
 module github.com/garyxiong123/go-learn/web/go-zero/basic
 
-go 1.15
+go 1.17
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
