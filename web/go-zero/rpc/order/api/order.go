@@ -2,14 +2,11 @@ package main
 
 import (
 	"flag"
-	"fmt"
-
-	"go-zero-demo/mall/order/api/internal/config"
-	"go-zero-demo/mall/order/api/internal/handler"
-	"go-zero-demo/mall/order/api/internal/svc"
-
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/garyxiong123/go-learn/web/go-zero/rpc/order/api/internal/config"
+	"github.com/garyxiong123/go-learn/web/go-zero/rpc/order/api/internal/handler"
+	"github.com/garyxiong123/go-learn/web/go-zero/rpc/order/api/internal/svc"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 var configFile = flag.String("f", "etc/order.yaml", "the config file")
@@ -26,6 +23,6 @@ func main() {
 
 	handler.RegisterHandlers(server, ctx)
 
-	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
+	//fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

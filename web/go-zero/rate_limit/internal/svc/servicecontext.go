@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"go-zero-demo/greet/internal/config"
+	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/config"
 )
 
 type ServiceContext struct {

@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"go-zero-demo/greet/internal/config"
+	"github.com/garyxiong123/go-learn/web/go-zero/error_code/internal/config"
 )
 
 type ServiceContext struct {

@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"github.com/tal-tech/go-zero/core/logx"
-	"go-zero-demo/greet/common/errorx"
-	"go-zero-demo/greet/internal/svc"
-	"go-zero-demo/greet/internal/types"
+	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/svc"
+	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/types"
+	"github.com/garyxiong123/go-learn/web/go-zero/common/errorx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type GreetLogic struct {

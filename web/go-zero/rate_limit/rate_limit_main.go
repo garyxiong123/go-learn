@@ -3,19 +3,18 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/config"
-	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/handler"
-	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/svc"
 	"github.com/garyxiong123/go-learn/web/go-zero/common/errorx"
+	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/config"
+	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/handler"
+	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/svc"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest/httpx"
 
 	"net/http"
-
-	"github.com/tal-tech/go-zero/core/conf"
-	"github.com/tal-tech/go-zero/rest"
-	"github.com/tal-tech/go-zero/rest/httpx"
 )
 
-var configFile = flag.String("f", "/Users/user/sdk/go_path/src/go-learn/web/go-zero/go-zero-demo/greet/etc/greet-api.yaml", "the config file")
+var configFile = flag.String("f", "./etc/greet-api.yaml", "the config file")
 
 func main() {
 	flag.Parse()

@@ -2,11 +2,9 @@
 package handler
 
 import (
+	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/svc"
+	"github.com/zeromicro/go-zero/rest"
 	"net/http"
-
-	"go-zero-demo/greet/internal/svc"
-
-	"github.com/tal-tech/go-zero/rest"
 )
 
 func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {

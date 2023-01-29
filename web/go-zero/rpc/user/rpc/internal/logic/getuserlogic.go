@@ -2,11 +2,9 @@ package logic
 
 import (
 	"context"
-
-	"go-zero-demo/mall/user/rpc/internal/svc"
-	"go-zero-demo/mall/user/rpc/user"
-
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/garyxiong123/go-learn/web/go-zero/rpc/user/rpc/internal/svc"
+	"github.com/garyxiong123/go-learn/web/go-zero/rpc/user/rpc/user"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type GetUserLogic struct {

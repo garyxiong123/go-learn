@@ -2,13 +2,11 @@ package handler
 
 import (
 	"fmt"
+	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/logic"
+	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/svc"
+	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/types"
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
-
-	"go-zero-demo/greet/internal/logic"
-	"go-zero-demo/greet/internal/svc"
-	"go-zero-demo/greet/internal/types"
-
-	"github.com/tal-tech/go-zero/rest/httpx"
 )
 
 func GreetHandler(ctx *svc.ServiceContext) http.HandlerFunc {
