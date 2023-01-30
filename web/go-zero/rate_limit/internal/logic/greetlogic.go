@@ -32,6 +32,7 @@ func (l *GreetLogic) Greet(req types.Request) (*types.Response, error) {
 		panic("gary panic")
 	}
 
+	//time.Sleep(3000 * time.Microsecond)
 	return &types.Response{
 		Message: "Hello go-zero",
 	}, nil

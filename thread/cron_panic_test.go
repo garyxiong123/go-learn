@@ -8,7 +8,31 @@ import (
 	"time"
 )
 
-func TestCron_Panic(t *testing.T) {
+func TestCron_Panic_without_recover(t *testing.T) {
+
+	cronJob := cron.New(cron.WithChain(
+		cron.SkipIfStillRunning(cron.DiscardLogger),
+	))
+
+	_, err := cronJob.AddFunc("@every 1s", func() {
+
+		panic("error happen")
+		println("sss") //不打印
+	})
+	if err != nil {
+		logx.Errorf("set tx pending count failed:%s", err.Error())
+	}
+
+	if err != nil {
+		panic(err)
+	}
+	cronJob.Start()
+	select {}
+
+	println("job started")
+}
+
+func TestCron_Panic_with_recover(t *testing.T) {
 
 	cronJob := cron.New(cron.WithChain(
 		cron.SkipIfStillRunning(cron.DiscardLogger),

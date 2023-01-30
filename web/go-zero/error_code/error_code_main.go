@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/config"
-	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/handler"
-	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/svc"
 	"github.com/garyxiong123/go-learn/web/go-zero/common/errorx"
+	"github.com/garyxiong123/go-learn/web/go-zero/error_code/internal/config"
+	"github.com/garyxiong123/go-learn/web/go-zero/error_code/internal/handler"
+	"github.com/garyxiong123/go-learn/web/go-zero/error_code/internal/svc"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -31,14 +31,14 @@ func main() {
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 
 	// 全局中间件
-	server.Use(func(next http.HandlerFunc) http.HandlerFunc {
-		return func(writer http.ResponseWriter, request *http.Request) {
-			println("gary execute before -----------")
-			next(writer, request)
-			println("gary execute after -----------", []byte("sss"))
-
-		}
-	})
+	//server.Use(func(next http.HandlerFunc) http.HandlerFunc {
+	//	return func(writer http.ResponseWriter, request *http.Request) {
+	//		println("gary execute before -----------")
+	//		next(writer, request)
+	//		println("gary execute after -----------", []byte("sss"))
+	//
+	//	}
+	//})
 
 	http.Handle("/swagger/", http.StripPrefix("/swagger/", http.FileServer(http.Dir("swagger-ui-dist"))))
 

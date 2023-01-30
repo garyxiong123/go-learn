@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	_ "go-learn/lifecycle/init1"
-	_ "go-learn/lifecycle/init2"
+	_ "github.com/garyxiong123/go-learn/lifecycle/init1"
+	_ "github.com/garyxiong123/go-learn/lifecycle/init2"
 	"os"
 )
 

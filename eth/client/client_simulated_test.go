@@ -15,15 +15,21 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 )
 
-func TestName(t *testing.T) {
+//使用模拟客户端
 
+//快速轻松地在本地测试您的交易，非常适合单元测试。为了开始，我们需要一个带有初始ETH的账户。为此，首先生成一个账户私钥。
+func TestSimulated(t *testing.T) {
+
+	//有初始ETH的账户。为此，首先生成一个账户私钥
 	privateKey, err := crypto.GenerateKey()
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	//接着从accounts/abi/bind包创建一个NewKeyedTransactor，并为其传递私钥。
 	auth := bind.NewKeyedTransactor(privateKey)
 
+	//下一步是创建一个创世账户并为其分配初始余额。我们将使用core包的GenesisAccount类型。
 	balance := new(big.Int)
 	balance.SetString("10000000000000000000", 10) // 10 eth in wei
 
@@ -35,9 +41,13 @@ func TestName(t *testing.T) {
 	}
 
 	blockGasLimit := uint64(4712388)
+	//现在我们将创世分配结构体和配置好的汽油上限传给account/abi/bind/backends包的NewSimulatedBackend方法，
+	//该方法将返回一个新的模拟以太坊客户端。
 	client := backends.NewSimulatedBackend(genesisAlloc, blockGasLimit)
 
 	fromAddress := auth.From
+
+	//新的交易并进行广播
 	nonce, err := client.PendingNonceAt(context.Background(), fromAddress)
 	if err != nil {
 		log.Fatal(err)
@@ -65,8 +75,10 @@ func TestName(t *testing.T) {
 
 	fmt.Printf("tx sent: %s\n", signedTx.Hash().Hex()) // tx sent: 0xec3ceb05642c61d33fa6c951b54080d1953ac8227be81e7b5e4e2cfed69eeb51
 
+	//模拟客户端的Commit方法手动开采区块。
 	client.Commit()
 
+	//现在您可以获取交易收据并看见其已被处理。
 	receipt, err := client.TransactionReceipt(context.Background(), signedTx.Hash())
 	if err != nil {
 		log.Fatal(err)
