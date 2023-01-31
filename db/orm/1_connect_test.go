@@ -2,7 +2,7 @@ package orm
 
 import (
 	"errors"
-	"go-learn/db/basic"
+	"github.com/garyxiong123/go-learn/db/basic"
 	"gorm.io/gorm"
 	"testing"
 )

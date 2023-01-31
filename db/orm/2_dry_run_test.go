@@ -1,12 +1,12 @@
 package orm
 
 import (
-	"go-learn/db/basic"
+	"github.com/garyxiong123/go-learn/db/basic"
 	"gorm.io/gorm"
 	"testing"
 )
 
-//Generate SQL and its arguments without executing, can be used to prepare or test generated SQL,
+// Generate SQL and its arguments without executing, can be used to prepare or test generated SQL,
 func Test_dry_run(t *testing.T) {
 
 	user := basic.User{}
