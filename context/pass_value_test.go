@@ -2,7 +2,6 @@ package context
 
 import (
 	"context"
-	"fmt"
 	"testing"
 )
 
@@ -15,8 +14,9 @@ func Test_Pass_Value(t *testing.T) {
 	name := context.Background().Value("name")
 
 	println(name)
-	context.TODO().Value("ddd")
-	println(context.TODO())
-	fmt.Println(context.TODO())
+
+}
+
+func Test_Pass_Value_Skip_Thread(t *testing.T) {
 
 }
