@@ -15,7 +15,7 @@
  *
  */
 
-package apollo
+package _2_apollo
 
 import (
 	"fmt"

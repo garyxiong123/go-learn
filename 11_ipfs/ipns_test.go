@@ -1,4 +1,4 @@
-package ipfs_t
+package _1_ipfs
 
 import (
 	"testing"

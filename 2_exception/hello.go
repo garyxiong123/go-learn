@@ -6,6 +6,4 @@ import (
 
 func Test_GenDoc(t *testing.T) {
 
-
-
 }
