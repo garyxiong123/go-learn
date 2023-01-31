@@ -1,6 +1,0 @@
-Name: greet-api
-Host: localhost
-Port: 8889
-#CpuThreshold: 1
-Timeout: 300
-MaxConns: 0

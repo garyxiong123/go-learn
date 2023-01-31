@@ -1,0 +1,12 @@
+ ipfs-car --pack /Users/user/ipfs-pic  --output /Users/user/ipfs-car/a.car
+
+
+ root CID: bafybeigjmmcdyi5clzzlvcut7wzluxjdeka3l4jsxrcdvpocupfv6xbp7q
+   output: /Users/user/ipfs-car/a.car
+
+
+
+   cid="bafybeigdmvh2wgmryq5ovlfu4bd3yiljokhzdep7abpe4c4lrf6rukkx4m"
+
+   ipfs dag export $cid > /Users/user/ipfs-car/a1.car
+
