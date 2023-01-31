@@ -1,8 +1,9 @@
-package main
+package contract
 
 import (
 	"fmt"
 	"log"
+	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -10,7 +11,7 @@ import (
 	store "github.com/garyxiong123/go-learn/eth/contract/contract_generate" // for demo
 )
 
-func main() {
+func Test_Contract_Write(t *testing.T) {
 	client, err := ethclient.Dial("https://rinkeby.infura.io")
 	if err != nil {
 		log.Fatal(err)
