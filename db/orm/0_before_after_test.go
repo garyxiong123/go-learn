@@ -1,7 +1,7 @@
 package orm
 
 import (
-	"go-learn/db/basic"
+	"github.com/garyxiong123/go-learn/db/basic"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"os"
