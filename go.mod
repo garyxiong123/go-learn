@@ -11,6 +11,8 @@ require (
 	gorm.io/driver/mysql v1.4.5
 	gorm.io/driver/sqlite v1.4.4
 	gorm.io/gorm v1.24.3
+	github.com/hashicorp/golang-lru v0.5.5-0.20221011183528-d4900dc688bf
+
 )
 
 require (
@@ -30,7 +32,6 @@ require (
 	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.0 // indirect
-	github.com/hashicorp/golang-lru v1.0.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/ipfs/bbloom v0.0.4 // indirect
 	github.com/ipfs/go-block-format v0.0.3 // indirect
@@ -117,4 +118,6 @@ require (
 	gopkg.in/ini.v1 v1.51.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	lukechampine.com/blake3 v1.1.6 // indirect
+	github.com/hashicorp/golang-lru v0.5.5-0.20221011183528-d4900dc688bf
+
 )
