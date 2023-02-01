@@ -2,9 +2,11 @@
 package handler
 
 import (
-	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/svc"
-	"github.com/zeromicro/go-zero/rest"
 	"net/http"
+
+	"github.com/garyxiong123/go-learn/web/go-zero/rate_limit/internal/svc"
+
+	"github.com/zeromicro/go-zero/rest"
 )
 
 func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
@@ -12,7 +14,7 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/from/:name",
+				Path:    "/greet",
 				Handler: GreetHandler(serverCtx),
 			},
 		},

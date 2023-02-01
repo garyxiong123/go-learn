@@ -2,7 +2,8 @@
 package types
 
 type Request struct {
-	Name string `path:"name,options=you|me|error|panic"`
+	UserId string `form:"userId"`
+	Name   string `form:"name"`
 }
 
 type Response struct {
