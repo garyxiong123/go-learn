@@ -16,3 +16,17 @@ test: lru_evict.go
 test: lru_not_evict.go
 # thread safe
 test: lru_thread_safe.go
+# accounts memory usage
+lru_memory_usage.go
+
+## 报告 每个用户40个资产
+
+accounts数量->占用内存
+
+1000000->     7666.950 M
+
+100000->       798.119 M
+
+10000->       82.471 M
+
+1000->         9.875 M
