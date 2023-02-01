@@ -2,7 +2,7 @@ package orm
 
 import (
 	"fmt"
-	"github.com/garyxiong123/go-learn/db/basic"
+	"github.com/garyxiong123/go-learn/4_db/basic"
 	"testing"
 )
 

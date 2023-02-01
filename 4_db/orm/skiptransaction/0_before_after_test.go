@@ -38,14 +38,19 @@ func setup() {
 
 }
 
+// gorm事务默认是开启的。为了确保数据一致性，Gorm会在事务里执行写入操作（增删改）。
+// 如果对数据一致性要求不高的话，可以在初始化时禁用它，性能将提升大约30%。
+// 一般不推荐禁用。
 func initDbConnection() {
 	dsn := "root:123456@tcp(localhost:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
-	Db, _ = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	Db, _ = gorm.Open(mysql.Open(dsn), &gorm.Config{SkipDefaultTransaction: true})
 	println(Db)
 }
 
 func intDbScheme() {
+	//delete table
 	Db.Migrator().DropTable(basic.Person{})
+	//create table
 	Db.AutoMigrate(basic.Person{})
 
 	Db.Migrator().DropTable(basic.User{})
