@@ -20,10 +20,12 @@ func Handle(rw http.ResponseWriter, req *http.Request) {
 
 // http://localhost:8899/
 
-func Test_Get_Http_Id(t *testing.T) {
+func Test_Http_Panic(t *testing.T) {
 
 	handler := newHandler(http.HandlerFunc(Handle))
+
 	http.ListenAndServe("localhost:8899", handler)
 
-	//http.ListenAndServe("localhost:8899", handler)
+	//为什么不会退出
+
 }
