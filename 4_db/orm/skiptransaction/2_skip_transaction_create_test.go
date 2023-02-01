@@ -20,7 +20,7 @@ func Test_skip_autocommit_error(t *testing.T) {
 	Db.CreateInBatches(value, len(value))
 }
 
-func Test_skip_autocommit_error_1(t *testing.T) {
+func Test_skip_autocommit_error_size(t *testing.T) {
 	var value []*basic.User
 	value = append(value, &basic.User{Name: "toni1"})
 	value = append(value, &basic.User{Name: "toni2"})
