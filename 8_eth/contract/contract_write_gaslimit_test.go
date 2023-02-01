@@ -4,18 +4,18 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
-	"log"
-	"math/big"
-
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-
-	store "github.com/garyxiong123/go-learn/eth/contract/contract_generate" // for demo
+	store "github.com/garyxiong123/go-learn/eth/contract/contract_generate"
+	"log"
+	"math/big"
+	"testing"
 )
 
-func main() {
+func TestGasLimit(t *testing.T) {
+
 	client, err := ethclient.Dial("https://rinkeby.infura.io")
 	if err != nil {
 		log.Fatal(err)
