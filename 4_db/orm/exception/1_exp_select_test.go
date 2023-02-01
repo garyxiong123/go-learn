@@ -13,6 +13,7 @@ import (
 func Test_exp_first(t *testing.T) {
 	user := &basic.User{}
 	tx := Db.Table("users").Where("name = ?", "toni").First(user)
+	fmt.Println(tx.Error)
 	fmt.Println(errors.Is(tx.Error, gorm.ErrRecordNotFound)) //包含各种错误类型
 }
 
