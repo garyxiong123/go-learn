@@ -6,3 +6,10 @@
 
 # golang-lru
 使用LRU算法，线程安全
+
+
+# lru_evict
+
+# lru_not_evict
+
+# lru_thread_safe
