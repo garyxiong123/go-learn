@@ -13,6 +13,25 @@ import (
 // 默认情况下会对嵌套事务的SavePoint采用自动命名，例如github.com/garyxiong123/go-learn/4_db/orm/transaction.Test_autocommit_nested.func1.2
 // 其中的N表示嵌套的层级数量，如果您看到日志中出现func1.2 表示当前嵌套层级为1（从0开始计算）
 
+func Test_autocommit_nested(t *testing.T) {
+	Db.Transaction(func(tx *gorm.DB) error {
+		tx.Create(&basic.User{Name: "toni1"})
+
+		//1.1
+		tx.Transaction(func(tx2 *gorm.DB) error {
+			tx2.Create(&basic.User{Name: "toni2"})
+			return nil
+		})
+
+		//1.2
+		tx.Transaction(func(tx2 *gorm.DB) error {
+			tx2.Create(&basic.User{Name: "toni3"})
+			return nil
+		})
+		return nil
+	})
+}
+
 func Test_autocommit_nested_0_error(t *testing.T) {
 	Db.Transaction(func(tx *gorm.DB) error {
 		tx.Create(&basic.User{Name: "toni1"})
@@ -26,10 +45,9 @@ func Test_autocommit_nested_0_error(t *testing.T) {
 		//1.2
 		tx.Transaction(func(tx2 *gorm.DB) error {
 			tx2.Create(&basic.User{Name: "toni3"})
-			return errors.New("rollback toni2") // Rollback user2
+			return nil
 		})
-
-		return nil
+		return errors.New("rollback toni1")
 	})
 }
 

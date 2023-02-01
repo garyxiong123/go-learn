@@ -7,8 +7,7 @@ import (
 	"testing"
 )
 
-// auto tx.Commit()
-func Test_autocommit(t *testing.T) {
+func Test_skip_autocommit(t *testing.T) {
 	Db.Transaction(func(tx *gorm.DB) error {
 		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
 		if err := tx.Create(&basic.User{Name: "toni1"}).Error; err != nil {
@@ -25,7 +24,7 @@ func Test_autocommit(t *testing.T) {
 	})
 }
 
-func Test_autocommit_2_error(t *testing.T) {
+func Test_skip_autocommit_error(t *testing.T) {
 	Db.Transaction(func(tx *gorm.DB) error {
 		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
 		if err := tx.Create(&basic.User{Name: "toni1"}).Error; err != nil {
@@ -34,7 +33,7 @@ func Test_autocommit_2_error(t *testing.T) {
 		}
 
 		if err := tx.Create(&basic.User{Name: "toni2"}).Error; err == nil {
-			return errors.New("rollback toni2")
+			return errors.New("rollback toni1")
 		}
 
 		// 返回 nil 提交事务
