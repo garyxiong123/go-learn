@@ -45,14 +45,13 @@ func initDbConnection() {
 }
 
 func intDbScheme() {
+	//delete table
 	Db.Migrator().DropTable(basic.Person{})
+	//create table
 	Db.AutoMigrate(basic.Person{})
 
 	Db.Migrator().DropTable(basic.User{})
 	Db.AutoMigrate(basic.User{})
-
-	Db.Migrator().DropTable(basic.Blog{})
-	Db.AutoMigrate(basic.Blog{})
 }
 
 func shutdown() {

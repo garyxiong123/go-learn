@@ -13,3 +13,14 @@ type Person struct {
 	Email string
 	Age   uint8
 }
+
+type Author struct {
+	Name  string
+	Email string
+}
+
+type Blog struct {
+	ID      int
+	Author  Author `gorm:"embedded;embeddedPrefix:base_"`
+	Upvotes int32
+}

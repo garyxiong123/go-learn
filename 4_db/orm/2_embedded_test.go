@@ -4,19 +4,7 @@ import (
 	"testing"
 )
 
-type Author struct {
-	Name  string
-	Email string
-}
-
-type Blog struct {
-	ID      int
-	Author  Author `gorm:"embedded"`
-	Upvotes int32
-}
-
+// 非内置的结构体就需要通过标签embedded 将其嵌入，并且还可以通过标签 embeddedPrefix 来为 db 中的字段名添加前缀：
 func Test_embedded(t *testing.T) {
-
-	Db.Save(Uuser)
-
+	//basic.Blog对象
 }

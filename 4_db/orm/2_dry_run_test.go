@@ -14,13 +14,12 @@ func Test_dry_run(t *testing.T) {
 	stmt := Db.Session(&gorm.Session{DryRun: true}).First(&user, 1).Statement
 	stmt.SQL.String() //=> SELECT * FROM `users` WHERE `id` = $1 ORDER BY `id`
 	//=> []interface{}{1}
-	println(stmt.Vars)
+	fmt.Println(stmt.Vars)
 
 }
 
 func Test_dry_run_create(t *testing.T) {
-
-	stmt := Db.Session(&gorm.Session{DryRun: true}).Create(&basic.User{Name: "toni"}).Statement
+	stmt := Db.Session(&gorm.Session{DryRun: true}).Create(&basic.User{Name: "toni", Age: 1}).Statement
 	stmt.SQL.String() //=> SELECT * FROM `users` WHERE `id` = $1 ORDER BY `id`
 	fmt.Println(stmt.SQL.String(), stmt.Vars)
 }
@@ -31,5 +30,5 @@ func Test_to_sql(t *testing.T) {
 	})
 
 	//=> SELECT * FROM "users" WHERE id = 100 AND "users"."deleted_at" IS NULL ORDER BY age desc LIMIT 10
-	println(sql)
+	fmt.Println(sql)
 }
