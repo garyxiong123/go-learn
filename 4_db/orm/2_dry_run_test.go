@@ -1,6 +1,7 @@
 package orm
 
 import (
+	"fmt"
 	"github.com/garyxiong123/go-learn/4_db/basic"
 	"gorm.io/gorm"
 	"testing"
@@ -15,6 +16,13 @@ func Test_dry_run(t *testing.T) {
 	//=> []interface{}{1}
 	println(stmt.Vars)
 
+}
+
+func Test_dry_run_create(t *testing.T) {
+
+	stmt := Db.Session(&gorm.Session{DryRun: true}).Create(&basic.User{Name: "toni"}).Statement
+	stmt.SQL.String() //=> SELECT * FROM `users` WHERE `id` = $1 ORDER BY `id`
+	fmt.Println(stmt.SQL.String(), stmt.Vars)
 }
 
 func Test_to_sql(t *testing.T) {
