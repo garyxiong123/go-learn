@@ -22,7 +22,7 @@ func NewGreetLogic(ctx context.Context, svcCtx *svc.ServiceContext) GreetLogic {
 	}
 }
 
-func (l *GreetLogic) Greet(req types.Request) (*types.Response, error) {
+func (l *GreetLogic) Greet(req *types.Request) (*types.Response, error) {
 	//time.Sleep(5 * time.Second)
 	if "code" == req.Name {
 		return nil, errorx.NewDefaultError("参数错误")
@@ -34,6 +34,6 @@ func (l *GreetLogic) Greet(req types.Request) (*types.Response, error) {
 
 	//time.Sleep(3000 * time.Microsecond)
 	return &types.Response{
-		Message: "Hello go-zero",
+		Message: "Hello " + req.Name,
 	}, nil
 }

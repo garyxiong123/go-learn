@@ -1,12 +1,13 @@
 type Request {
-    Name string `path:"name,options=you|me"`
+	UserId string `form:"userId"`
+	Name   string `form:"name"`
 }
 
 type Response {
-    Message string `json:"message"`
+	Message string `json:"message"`
 }
 
 service greet-api {
-    @handler GreetHandler
-    get /from/:name (Request) returns (Response);
+	@handler GreetHandler
+	get /greet (Request) returns (Response);
 }
