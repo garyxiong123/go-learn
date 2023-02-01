@@ -27,15 +27,6 @@ func setup() {
 
 	intDbScheme()
 
-	Uuser = basic.User{
-		Name: "gary",
-		Age:  32,
-	}
-	person = basic.Person{
-		Age:   20,
-		Email: "50222@qq.com",
-		Name:  "gary"}
-
 }
 
 func initDbConnection() {
@@ -45,14 +36,8 @@ func initDbConnection() {
 }
 
 func intDbScheme() {
-	Db.Migrator().DropTable(basic.Person{})
-	Db.AutoMigrate(basic.Person{})
-
-	Db.Migrator().DropTable(basic.User{})
-	Db.AutoMigrate(basic.User{})
-
-	Db.Migrator().DropTable(basic.Blog{})
-	Db.AutoMigrate(basic.Blog{})
+	Db.Migrator().DropTable(basic.Apple{})
+	Db.AutoMigrate(basic.Apple{})
 }
 
 func shutdown() {
