@@ -1,0 +1,13 @@
+type Request {
+	UserId string `form:"userId"`
+	Name   string `form:"name"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+service greet-api {
+	@handler GreetHandler
+	get /greet (Request) returns (Response);
+}
