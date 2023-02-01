@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// time = 17.05s
 func Test_skip_transaction(t *testing.T) {
 	start := time.Now()
 	for i := 0; i < 5000; i++ {

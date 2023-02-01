@@ -7,7 +7,8 @@ import (
 	"time"
 )
 
-func Test_skip_transaction(t *testing.T) {
+// time = 24.62s
+func Test_no_skip_transaction(t *testing.T) {
 	start := time.Now()
 	for i := 0; i < 5000; i++ {
 		Db.Create(&basic.User{Name: "toni"})
