@@ -6,18 +6,14 @@ import (
 	"testing"
 )
 
-func funcAWithOutRecover() error {
-	return funcB1()
-}
-
-func funcB1() error {
+func throwPanic() error {
 	// simulation
 	panic("foo")
 	return errors.New("success")
 }
 
 func Test_Panic_No_Recover(t *testing.T) {
-	err := funcAWithOutRecover()
+	err := throwPanic()
 	if err == nil {
 		fmt.Printf("err is nil\\n")
 	} else {
