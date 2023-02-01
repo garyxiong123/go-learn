@@ -13,7 +13,8 @@ import (
 	store "github.com/garyxiong123/go-learn/eth/contract/contract_generate"
 )
 
-func Test_write_estimate_gas(t *testing.T) {
+//？？
+func Test_write_estimate_gas_limit(t *testing.T) {
 
 	//先查到nonce和燃气价格
 	gasPrice, err := client.SuggestGasPrice(context.Background())
@@ -21,7 +22,8 @@ func Test_write_estimate_gas(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	//很低的limit有
+	//todo mark
 	address := common.HexToAddress("0x147B8eb97fD247D06C4006D269c90C1908Fb5D54")
 
 	//我们创建的智能合约有一个名为SetItem的外部方法，它接受solidity“bytes32”格式的两个参数（key，value）。

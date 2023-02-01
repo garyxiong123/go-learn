@@ -11,7 +11,7 @@ func funcA() error {
 	defer func() {
 		if p := recover(); p != nil {
 			fmt.Printf("panic recover! p: %v", p)
-			debug.PrintStack()
+			debug.PrintStack() //?? 敏感
 		}
 	}()
 	return funcB()

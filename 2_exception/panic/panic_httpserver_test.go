@@ -24,4 +24,6 @@ func Test_Get_Http_Id(t *testing.T) {
 
 	handler := newHandler(http.HandlerFunc(Handle))
 	http.ListenAndServe("localhost:8899", handler)
+
+	//http.ListenAndServe("localhost:8899", handler)
 }
