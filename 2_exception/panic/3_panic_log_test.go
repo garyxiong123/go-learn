@@ -21,7 +21,7 @@ package panic
 //}
 //
 ////panic异常处理机制不会自动将错误信息传递给error，所以要在funcA函数中进行显式的传递
-//func Test_Panic_with_error(t *testing.T) {
+//func Test_Panic_transfer_2_error(t *testing.T) {
 //	err := errorPass()
 //	if err == nil {
 //		fmt.Printf("err is nil\\n")

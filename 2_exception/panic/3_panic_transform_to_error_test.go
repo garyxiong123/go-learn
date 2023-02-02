@@ -10,39 +10,14 @@ import (
 //我们在调用recover的延迟函数中以最合理的方式响应该异常：
 //
 
-func Test_Panic_No_error(t *testing.T) {
-	err := errorNoPass()
-	if err == nil {
-		fmt.Printf("err is nil\\n")
-	} else {
-		fmt.Printf("err is %v\\n", err)
-	}
-}
-
 //panic异常处理机制不会自动将错误信息传递给error，所以要在funcA函数中进行显式的传递
-func Test_Panic_with_error(t *testing.T) {
+func Test_Panic_transfer_2_error(t *testing.T) {
 	err := errorPass()
 	if err == nil {
 		fmt.Printf("err is nil\\n")
 	} else {
 		fmt.Printf("err is %v\\n", err)
 	}
-}
-
-func errorNoPass() error {
-
-	defer func() {
-
-		if p := recover(); p != nil {
-			//打印堆栈的异常调用信息和关键的业务信息，以便这些问题保留可见；
-			fmt.Printf("panic recover! p: %v", p)
-			debug.PrintStack() //?? 敏感
-
-			//将异常转换为错误，以便调用者让程序恢复到健康状态并继续安全运行
-		}
-	}()
-
-	return throwPanicWithError()
 }
 
 //显式的传递Error
@@ -66,4 +41,29 @@ func throwPanicWithError() error {
 	// simulation
 	panic("foo")
 	return errors.New("success")
+}
+
+func Test_Panic_No_error(t *testing.T) {
+	err := errorNoPass()
+	if err == nil {
+		fmt.Printf("err is nil\\n")
+	} else {
+		fmt.Printf("err is %v\\n", err)
+	}
+}
+
+func errorNoPass() error {
+
+	defer func() {
+
+		if p := recover(); p != nil {
+			//打印堆栈的异常调用信息和关键的业务信息，以便这些问题保留可见；
+			fmt.Printf("panic recover! p: %v", p)
+			debug.PrintStack() //?? 敏感
+
+			//将异常转换为错误，以便调用者让程序恢复到健康状态并继续安全运行
+		}
+	}()
+
+	return throwPanicWithError()
 }
