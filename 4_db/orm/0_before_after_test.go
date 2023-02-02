@@ -1,7 +1,7 @@
 package orm
 
 import (
-	"github.com/garyxiong123/go-learn/db/basic"
+	"github.com/garyxiong123/go-learn/4_db/basic"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"os"
@@ -50,6 +50,9 @@ func intDbScheme() {
 
 	Db.Migrator().DropTable(basic.User{})
 	Db.AutoMigrate(basic.User{})
+
+	Db.Migrator().DropTable(basic.Blog{})
+	Db.AutoMigrate(basic.Blog{})
 }
 
 func shutdown() {
