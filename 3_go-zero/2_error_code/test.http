@@ -13,6 +13,10 @@ GET http://localhost:8889/from/you1
 GET http://localhost:8889/from/panic
 
 
+
+# curl -i -X GET http://localhost:8889/from/errorCode
+###
+GET http://localhost:8889/from/errorCode
 // how to do the request limit
 
 

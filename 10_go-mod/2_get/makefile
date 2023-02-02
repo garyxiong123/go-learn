@@ -3,8 +3,10 @@
 
 
 ##2.下载modules到本地cache 目前所有模块版本数据均缓存在 $GOPATH/pkg/mod和 $GOPATH/pkg/sum
-#如果没有指明 version 的情况下，则默认先下载打了 tag 的 release 版本，
-#比如 v0.4.5 或者 v1.2.3；如果没有 release 版本，则下载最新的 pre release 版本，比如 v0.0.1-pre1。如果还没有则下载最新的 commit
+#如果没有指明 version 的情况下，
+#1:则默认先下载打了 tag 的 release 版本，
+#比如 v0.4.5 或者 v1.2.3；
+#2:如果没有 release 版本，则下载最新的 pre release 版本，比如 v0.0.1-pre1。如果还没有则下载最新的 commit
 go-get-h:
 	go help get
 
