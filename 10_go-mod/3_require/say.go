@@ -1,4 +1,4 @@
-package require
+package __require
 
 import (
 	"fmt"
