@@ -1,6 +1,7 @@
 
-go:
-	goctl api go -api server.api -dir .
+go-get:
+	go get github.com/garyxiong123/go-learn
 
-java:
-	sudo bash -x ./deploy-local-gary.sh
+clean-mod-cache:
+	go clean -modcache
+

@@ -12,7 +12,7 @@ exclude 语句可以忽略依赖项模块
 
 
 
-go module 安装 package 的原則是先拉最新的 release tag，若无tag则拉最新的commit
+
 
 go 会自动生成一个 go.sum 文件来记录 dependency tree
 
