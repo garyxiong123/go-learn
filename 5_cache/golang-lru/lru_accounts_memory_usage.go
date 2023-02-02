@@ -21,10 +21,17 @@ func main() {
 
 	before := memConsumed() //获取创建goroutine前内存
 
+	// 40 assets
 	// 1000000     7666.950 M
 	// 100000       798.119 M
 	// 10000         82.471 M
 	// 1000           9.875 M
+
+	// 20 assets
+	// 1000000     4030.459 M
+	// 100000       446.180 M
+	// 10000         46.937 M
+	// 1000           9.625 M
 	reloadAccounts(1000000)
 
 	after := memConsumed() //获取创建goroutine后内存
@@ -52,7 +59,48 @@ type AccountInfo struct {
 	Status          int
 }
 
-func toFormatAccountInfo() (formatAccountInfo *AccountInfo) {
+func toFormatAccountInfo20() (formatAccountInfo *AccountInfo) {
+	var assetInfo map[int64]*AccountAsset
+	str := "{\"0\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"1\":{\"AssetId\":1,\"Balance\":100000000000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"2\":{\"AssetId\":2,\"Balance\":100000000010000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"3\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"4\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"5\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"6\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"7\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"8\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"9\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"10\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"11\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"12\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"13\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"14\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"15\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"16\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"17\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"18\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
+		"\"19\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}" +
+		"}"
+	_ = json.Unmarshal([]byte(str), &assetInfo)
+
+	formatAccountInfo = &AccountInfo{
+		AccountId:       100000000,
+		AccountIndex:    100000000,
+		AccountName:     "zkbnbqa02.zkbnb",
+		PublicKey:       "7d344522973c6790f37a5cf5d31c13e2bc105b1903698eb138efac13c990cc25",
+		AccountNameHash: "00bcfda5afb9bcbee48bf52b8911d0ad52089d5fd4aa4ffe838c18157c4d3ad1",
+		L1Address:       "0x94F037c94731e82EDD79DFB03CaB14fBF798100f",
+		Nonce:           100000,
+		CollectionNonce: 100000,
+		AssetInfo:       assetInfo,
+		AssetRoot:       "301f69702abaa96ff347924f6d7fa49e1ef860211b371950565090a539de975b",
+		Status:          1,
+	}
+	return formatAccountInfo
+}
+
+func toFormatAccountInfo40() (formatAccountInfo *AccountInfo) {
 	var assetInfo map[int64]*AccountAsset
 	str := "{\"0\":{\"AssetId\":0,\"Balance\":99988000000000000,\"OfferCanceledOrFinalized\":0}," +
 		"\"1\":{\"AssetId\":1,\"Balance\":100000000000000000000,\"OfferCanceledOrFinalized\":0}," +
@@ -122,7 +170,7 @@ func reloadAccounts(count int) {
 		logx.Severef("err: %v", err)
 	}
 	for i := 0; i < count; i++ {
-		accountInfo := toFormatAccountInfo()
+		accountInfo := toFormatAccountInfo20()
 		l.Add(i, accountInfo)
 	}
 
