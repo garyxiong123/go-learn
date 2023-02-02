@@ -1,4 +1,4 @@
-module github.com/garyxiong123/go-learn//go-mod
+module github.com/garyxiong123/go-learn //go-mod
 
 go 1.17
 
