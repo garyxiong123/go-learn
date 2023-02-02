@@ -20,6 +20,7 @@ TinyLFU:对一个key我们会取他的hash值，找到对应位置，然后累�
 # 线程安全
 
 # Test
-capacity.go
+capacity_count.go
+capacity_size.go
 
 expire.go
