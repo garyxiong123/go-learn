@@ -18,9 +18,11 @@ TinyLFU:对一个key我们会取他的hash值，找到对应位置，然后累�
 
 
 # 线程安全
+![img_3.png](images/img_3.png)
 
 # Test
 capacity_count.go
+
 capacity_size.go
 
 expire.go

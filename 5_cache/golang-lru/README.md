@@ -7,6 +7,7 @@
 # golang-lru
 ![img.png](images/img.png)
 ![img_1.png](images/img_1.png)
+![img.png](images/img_2.png)
 
 golang-lru是一个基于双向链表实现的线程安全LRU缓存工具，若数据已经在缓存中，将其移到队首，并返回结果。若数据不在缓存中，将新记录添加到队首。若缓存超长，清理队尾缓存数据。
 
