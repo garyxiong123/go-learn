@@ -23,6 +23,7 @@ func Test_Panic_transfer_2_error(t *testing.T) {
 //显式的传递Error
 func errorPass() (err error) {
 	defer func() {
+		//todo recover bad inflowence
 		if p := recover(); p != nil {
 			fmt.Println("panic recover! p:", p)
 			str, ok := p.(string)

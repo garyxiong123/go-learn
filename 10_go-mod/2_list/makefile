@@ -3,7 +3,7 @@
 ##清除未使用到的依赖
 
 go-get:
-	go get github.com/garyxiong123/go-learn
+	go get github.com/zeromicro/go-zero
 
 go-list:
 	go list -m all

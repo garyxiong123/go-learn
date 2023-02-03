@@ -39,6 +39,7 @@ func TestCron_Panic_with_recover(t *testing.T) {
 	cronJob := newCronJob()
 
 	cronJob.AddFunc("@every 1s", func() {
+
 		defer func() {
 			if x := recover(); x != nil {
 				time.Sleep(5 * time.Second)

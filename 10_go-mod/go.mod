@@ -5,7 +5,9 @@ go 1.17
 require github.com/alanshaw/go-carbites v0.5.0
 
 require (
-	github.com/garyxiong123/go-learn v0.0.0-20230202061047-b6db7b72ca16 // indirect
+	github.com/garyxiong123/go-depency-A v1.0.5-m // indirect
+	github.com/garyxiong123/go-depency-B v0.0.0-20230125115537-482130fc1d54 // indirect
+	github.com/garyxiong123/go-learn v0.0.0-20230202091627-afb49e8076ac // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.5-0.20221011183528-d4900dc688bf // indirect
@@ -48,6 +50,7 @@ require (
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/whyrusleeping/cbor v0.0.0-20171005072247-63513f603b11 // indirect
 	github.com/whyrusleeping/cbor-gen v0.0.0-20200123233031-1cdf64d27158 // indirect
+	github.com/zeromicro/go-zero v1.4.4 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
