@@ -23,8 +23,8 @@ func NewGreetLogic(ctx context.Context, svcCtx *svc.ServiceContext) GreetLogic {
 }
 
 func (l *GreetLogic) Greet(req types.Request) (*types.Response, error) {
-	//time.Sleep(5 * time.Second)
-	if "errorcode" == req.Name {
+
+	if "errorCode" == req.Name {
 		return nil, errorx.NewDefaultError("参数错误")
 	}
 

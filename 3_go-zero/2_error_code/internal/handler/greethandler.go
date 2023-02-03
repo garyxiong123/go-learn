@@ -25,11 +25,7 @@ func GreetHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := logic.NewGreetLogic(r.Context(), ctx)
-		resp, err := l.Greet(req)
-		if err != nil {
-			httpx.Error(w, err)
-		} else {
-			httpx.OkJson(w, resp)
-		}
+		resp, _ := l.Greet(req)
+		httpx.OkJson(w, resp)
 	}
 }

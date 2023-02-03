@@ -27,23 +27,6 @@ func main() {
 
 	handler.RegisterHandlers(server, ctx)
 
-	//fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
-
-	// 全局中间件
-	server.Use(func(next http.HandlerFunc) http.HandlerFunc {
-
-		return func(writer http.ResponseWriter, request *http.Request) {
-			println("gary execute before -----------")
-
-			next(writer, request) //filter
-
-			println("gary execute after -----------", []byte("sss"))
-
-		}
-	})
-
-	http.Handle("/swagger/", http.StripPrefix("/swagger/", http.FileServer(http.Dir("swagger-ui-dist"))))
-
 	// 自定义错误
 	httpx.SetErrorHandler(func(err error) (int, interface{}) {
 		switch e := err.(type) {

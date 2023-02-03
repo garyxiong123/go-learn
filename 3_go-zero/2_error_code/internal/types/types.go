@@ -2,7 +2,7 @@
 package types
 
 type Request struct {
-	Name string `path:"name,options=you|me|error|panic"`
+	Name string `path:"name,options=you|me|errorCode|panic"`
 }
 
 type Response struct {

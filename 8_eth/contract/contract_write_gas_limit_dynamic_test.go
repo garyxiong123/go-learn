@@ -4,29 +4,50 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
+	"log"
+	"math/big"
+	"testing"
+
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	store "github.com/garyxiong123/go-learn/eth/contract/contract_generate"
-	"log"
-	"math/big"
-	"testing"
+
+	store "github.com/garyxiong123/go-learn/eth/contract/contract_generate" // for demo
 )
 
-/**
-*
- */
-func TestGas(t *testing.T) {
+//gas price ++  BSC 5%   -10%
+
+//gas limit ++ 不可以不加， 什么情况加
+
+//nonce, err := cli.GetPendingNonce(authCli.Address.Hex())
+//用 laster 还是 pending
+
+//Returned error: transaction underpriced
+//
+//Returned error: replacement transaction underpriced
+
+func init() {
 
 }
 
-func TestGasDifForCalc(t *testing.T) {
-
+func TestUnderPrice(t *testing.T) {
+	//error  under price
 }
 
-func TestGasLimit(t *testing.T) {
+//todo
 
+//低于平均价格
+func TestUnderPrice_Low_Than_AveragePrice(t *testing.T) {
+	//error  under price
+}
+
+//低于上次价格
+func TestUnderPrice_Low_Than_LastTime(t *testing.T) {
+	//error  under price
+}
+
+func main() {
 	client, err := ethclient.Dial("https://rinkeby.infura.io")
 	if err != nil {
 		log.Fatal(err)

@@ -1,4 +1,4 @@
-package t_test
+package skip_package_test
 
 import "testing"
 
