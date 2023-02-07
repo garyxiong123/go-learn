@@ -9,6 +9,7 @@ import (
 	"github.com/shopspring/decimal"
 	"log"
 	"math/big"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -188,6 +189,20 @@ func doTransaction(nonce uint64, gasPrice *big.Int, keyStr string, valuesStr str
 	}
 	fmt.Printf("tx sent: %s\n", tx.Hash().Hex()) // tx sent: 0x8d490e535678e9a24360e955d75b27ad307bdfb97a1dca51d0f3035dcee3e870
 	time.Sleep(30 * time.Second)
+
+	transaction, isPending, err := client.TransactionByHash(context.Background(), tx.Hash())
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("transaction hash="+" hash="+transaction.Hash().Hex()+" Nonce="+strconv.FormatUint(transaction.Nonce(), 10)+" GasPrice= "+transaction.GasPrice().String()+" isPending=", isPending) // "bar"
+
+	receipt, err := client.TransactionReceipt(context.Background(), tx.Hash())
+	if err == nil {
+		fmt.Println("receipt hash=" + " hash=" + receipt.TxHash.Hex() + " Status=" + strconv.FormatUint(receipt.Status, 10)) // "bar"
+	} else {
+		log.Print(err)
+	}
+
 	result, err := instance.Items(nil, key)
 	if err != nil {
 		log.Fatal(err)
