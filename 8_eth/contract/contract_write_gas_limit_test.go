@@ -30,6 +30,23 @@ func TestExceedsBlockGasLimit(t *testing.T) {
 	tx(100000000)
 }
 
+func TestExceedsBlockGas1Limit(t *testing.T) {
+	tx(10000000)
+}
+
+//ether被最小单位为wei，1ether = 10^{\18}wei
+//func checkTxFee(gasPrice *big.Int, gas uint64, cap float64) error {
+//	// Short circuit if there is no cap for transaction fee at all.
+//	if cap == 0 {
+//		return nil
+//	}
+//	feeEth := new(big.Float).Quo(new(big.Float).SetInt(new(big.Int).Mul(gasPrice, new(big.Int).SetUint64(gas))), new(big.Float).SetInt(big.NewInt(params.Ether)))
+//	feeFloat, _ := feeEth.Float64()
+//	if feeFloat > cap {
+//		return fmt.Errorf("tx fee (%.2f ether) exceeds the configured cap (%.2f ether)", feeFloat, cap)
+//	}
+//	return nil
+//}
 //exceeds the configured cap (1.00 ether)
 func TestExceedsConfiguredCapGasLimit(t *testing.T) {
 	tx(100000001)
@@ -73,6 +90,7 @@ func tx(gasLimit uint64) {
 	auth.Value = big.NewInt(0) // in wei
 	auth.GasLimit = gasLimit   // in units
 	auth.GasPrice = gasPrice
+	fmt.Println("gas =", gasLimit*gasPrice.Uint64()) // "bar"
 
 	address := common.HexToAddress(contractAddress)
 	instance, err := store.NewStore(address, client)
