@@ -17,22 +17,36 @@ import (
 /**
 *
  */
-func TestGas(t *testing.T) {
-
+func TestGasLimit(t *testing.T) {
+	tx(10000000)
 }
 
 func TestGasDifForCalc(t *testing.T) {
 
 }
 
-func TestGasLimit(t *testing.T) {
+//exceeds block gas limit
+func TestExceedsBlockGasLimit(t *testing.T) {
+	tx(100000000)
+}
 
-	client, err := ethclient.Dial("https://rinkeby.infura.io")
+//exceeds the configured cap (1.00 ether)
+func TestExceedsConfiguredCapGasLimit(t *testing.T) {
+	tx(100000001)
+}
+
+//intrinsic gas too low
+func TestGasTooLow(t *testing.T) {
+	tx(21000)
+}
+
+func tx(gasLimit uint64) {
+	client, err := ethclient.Dial(testnet)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("fad9c8855b740a0b7ed4c221dbad0f33a83a49cad6b3fe8d5817ac83d38b6a19")
+	privateKey, err := crypto.HexToECDSA(privateKeyStr)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,11 +70,11 @@ func TestGasLimit(t *testing.T) {
 
 	auth := bind.NewKeyedTransactor(privateKey)
 	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)     // in wei
-	auth.GasLimit = uint64(300000) // in units
+	auth.Value = big.NewInt(0) // in wei
+	auth.GasLimit = gasLimit   // in units
 	auth.GasPrice = gasPrice
 
-	address := common.HexToAddress("0x147B8eb97fD247D06C4006D269c90C1908Fb5D54")
+	address := common.HexToAddress(contractAddress)
 	instance, err := store.NewStore(address, client)
 	if err != nil {
 		log.Fatal(err)
