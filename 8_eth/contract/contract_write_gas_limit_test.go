@@ -17,22 +17,53 @@ import (
 /**
 *
  */
-func TestGas(t *testing.T) {
-
+func TestGasLimit(t *testing.T) {
+	tx(10000000)
 }
 
 func TestGasDifForCalc(t *testing.T) {
 
 }
 
-func TestGasLimit(t *testing.T) {
+//exceeds block gas limit
+func TestExceedsBlockGasLimit(t *testing.T) {
+	tx(100000000)
+}
 
-	client, err := ethclient.Dial("https://rinkeby.infura.io")
+func TestExceedsBlockGas1Limit(t *testing.T) {
+	tx(10000000)
+}
+
+//ether被最小单位为wei，1ether = 10^{\18}wei
+//func checkTxFee(gasPrice *big.Int, gas uint64, cap float64) error {
+//	// Short circuit if there is no cap for transaction fee at all.
+//	if cap == 0 {
+//		return nil
+//	}
+//	feeEth := new(big.Float).Quo(new(big.Float).SetInt(new(big.Int).Mul(gasPrice, new(big.Int).SetUint64(gas))), new(big.Float).SetInt(big.NewInt(params.Ether)))
+//	feeFloat, _ := feeEth.Float64()
+//	if feeFloat > cap {
+//		return fmt.Errorf("tx fee (%.2f ether) exceeds the configured cap (%.2f ether)", feeFloat, cap)
+//	}
+//	return nil
+//}
+//exceeds the configured cap (1.00 ether)
+func TestExceedsConfiguredCapGasLimit(t *testing.T) {
+	tx(100000001)
+}
+
+//intrinsic gas too low
+func TestGasTooLow(t *testing.T) {
+	tx(21000)
+}
+
+func tx(gasLimit uint64) {
+	client, err := ethclient.Dial(testnet)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("fad9c8855b740a0b7ed4c221dbad0f33a83a49cad6b3fe8d5817ac83d38b6a19")
+	privateKey, err := crypto.HexToECDSA(privateKeyStr)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,11 +87,12 @@ func TestGasLimit(t *testing.T) {
 
 	auth := bind.NewKeyedTransactor(privateKey)
 	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)     // in wei
-	auth.GasLimit = uint64(300000) // in units
+	auth.Value = big.NewInt(0) // in wei
+	auth.GasLimit = gasLimit   // in units
 	auth.GasPrice = gasPrice
+	fmt.Println("gas =", gasLimit*gasPrice.Uint64()) // "bar"
 
-	address := common.HexToAddress("0x147B8eb97fD247D06C4006D269c90C1908Fb5D54")
+	address := common.HexToAddress(contractAddress)
 	instance, err := store.NewStore(address, client)
 	if err != nil {
 		log.Fatal(err)
