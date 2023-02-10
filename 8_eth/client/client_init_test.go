@@ -1,6 +1,7 @@
 package client
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"testing"
@@ -17,6 +18,19 @@ func Test_Init_Client_Infura(t *testing.T) {
 
 	fmt.Println("we have a connection")
 	_ = client
+	gasprice, err := client.SuggestGasPrice(context.Background())
+
+	if err != nil {
+
+	}
+	println(gasprice)
+
+	networkId, err := client.NetworkID(context.Background())
+	println(networkId)
+	if err != nil {
+
+	}
+
 }
 
 func Test_Init_Client_Local_IPC(t *testing.T) {

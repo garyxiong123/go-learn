@@ -8,10 +8,12 @@ import (
 
 var cloudClient ethclient.Client
 var localClient ethclient.Client
+var BscClient *ethclient.Client
 
 func init() {
 	initCloudClient()
 	initLocalClient()
+	initBscClient()
 
 }
 
@@ -31,4 +33,14 @@ func initCloudClient() {
 		log.Fatal(err)
 	}
 	println(cloud_client)
+}
+
+func initBscClient() {
+	BscClient, _ = ethclient.Dial("https://bsc-testnet.nodereal.io/v1/a1cee760ac744f449416a711f20d99dd")
+	println(BscClient)
+
+}
+
+func initWsClient() {
+
 }
