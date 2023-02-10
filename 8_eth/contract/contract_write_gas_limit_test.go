@@ -117,3 +117,74 @@ func tx(gasLimit uint64) {
 
 	fmt.Println(string(result[:])) // "bar"
 }
+
+func TestBlockGasLimit(t *testing.T) {
+	//0x380eb2a5c9efce75e0addb4b1a1267355efbd759a71a808c3ebeff1ee76cf420  1 commit block   transfer   1
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0x380eb2a5c9efce75e0addb4b1a1267355efbd759a71a808c3ebeff1ee76cf420/gas-usage
+	//1+4+4+2+5+2+2+32=52    52+69=121
+	//Total Gas - 86,680 Gas
+	//Actual Gas Used - 86,680 Gas
+	//Initial Gas - 30,560 Gas
+	//CALL - 56,120 Gas
+	//fmt.Println("transfer bnb,commit block,1 tx per block,1 block", 30560-(21000+56*16+136*4+9*192*4))
+	fmt.Println("transfer bnb,commit block,1 tx per block,1 block", 30560-(21000+52*16+69*4+9*121*4))
+
+	//0xb7d1b2b5380290bf6f85e92b5b3d002192ca67b066488ca5126c8e2af7efaf68  1  commit block   transfer  2
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0xb7d1b2b5380290bf6f85e92b5b3d002192ca67b066488ca5126c8e2af7efaf68/gas-usage
+	//Total Gas - 87,172 Gas
+	//Actual Gas Used - 87,172 Gas
+	//Initial Gas - 31,052 Gas
+	//CALL - 56,120 Gas
+	//fmt.Println("transfer bnb,commit block,2 tx per block,1 block", 31052-(21000+2*56*16+2*136*4+8*192*4))
+	fmt.Println("transfer bnb,commit block,2 tx per block,1 block", 31052-(21000+2*52*16+2*69*4+8*121*4))
+
+	//0x02e389e0b52f5a3b3ec8bd9fcc78182307e1e8960c4cb12c05be318a498fc662  1  commit block   transfer  3
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0x02e389e0b52f5a3b3ec8bd9fcc78182307e1e8960c4cb12c05be318a498fc662/gas-usage
+	//Total Gas - 87,676 Gas
+	//Actual Gas Used - 87,676 Gas
+	//Initial Gas - 31,556 Gas
+	//CALL - 56,120 Gas
+	fmt.Println("transfer bnb,commit block,3 tx per block,1 block", 31556-(21000+3*52*16+3*69*4+7*121*4))
+
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0xd7f05674338178e2a29ea70a87641d1e822462f8870fc53e02d2bf2531b5beba/gas-usage
+	//Total Gas - 271,475 Gas
+	//Actual Gas Used - 271,475 Gas
+	//Initial Gas - 28,260 Gas
+	//CALL - 243,215 Gas
+	//fmt.Println("transfer bnb,verify block,1 tx per block,1 block", 30560-(21000+52*16+69*4+9*121*4))
+
+	//0x35005d1b80e01f081a37bc402b513699e236078ce4af8e43ddb90259c184e24b  1  commit block   transfer  2
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0x35005d1b80e01f081a37bc402b513699e236078ce4af8e43ddb90259c184e24b/gas-usage
+	//Total Gas - 271,475 Gas
+	//Actual Gas Used - 271,475 Gas
+	//Initial Gas - 28,260 Gas
+	//CALL - 243,215 Gas
+	//fmt.Println("transfer bnb,verify block,2 tx per block,1 block", 31052-(21000+2*52*16+2*69*4+8*121*4))
+
+	//0x398ccb2ff9cd4c7d0435ab22e269137f8ddad6909e52a9d0475e34b009c21da2  1  commit block   transfer  3
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0x398ccb2ff9cd4c7d0435ab22e269137f8ddad6909e52a9d0475e34b009c21da2/gas-usage
+	//Total Gas - 271,463 Gas
+	//Actual Gas Used - 271,463 Gas
+	//Initial Gas - 28,248 Gas
+	//CALL - 243,215 Gas
+	//fmt.Println("transfer bnb,verify block,3 tx per block,1 block", 31556-(21000+3*52*16+3*69*4+7*121*4))
+
+	//-----withdraw bnb
+	//0x1c6d99d4cc3c096c522e4fd9a361c1dd2f8187cee61564e925e4ae7d854ed6c3  1 commit block   withdraw   1
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0x1c6d99d4cc3c096c522e4fd9a361c1dd2f8187cee61564e925e4ae7d854ed6c3/gas-usage
+	//1+4+20+2+16+2+2=47    47+74=121
+	//Total Gas - 88,266 Gas
+	//Actual Gas Used - 88,266 Gas
+	//Initial Gas - 30,520 Gas
+	//CALL - 57,746 Gas
+	fmt.Println("withdraw bnb,commit block,1 tx per block,1 block", 30520-(21000+47*16+74*4+9*121*4))
+
+	//0x299c6c214ca46aff2ccc8c62af90b2670d5df3c2c2a8dd545d13db3c9aef31e7  1 commit block   withdraw   2
+	//https://dashboard.tenderly.co/tx/bsc-testnet/0x299c6c214ca46aff2ccc8c62af90b2670d5df3c2c2a8dd545d13db3c9aef31e7/gas-usage
+	//Total Gas - 90,392 Gas
+	//Actual Gas Used - 90,392 Gas
+	//Initial Gas - 31,020 Gas
+	//CALL - 59,372 Gas
+	fmt.Println("withdraw bnb,commit block,2 tx per block,1 block", 31020-(21000+2*47*16+2*74*4+8*121*4))
+
+}
