@@ -25,6 +25,9 @@ func sum(s []int, c chan int) {
 }
 
 func Test_chan(t *testing.T) {
+	maxCollectionId := 1 << 16
+	println(maxCollectionId)
+	fmt.Printf("", num)
 	s := []int{7, 2, 8, -9, 4, 0}
 
 	c := make(chan int)

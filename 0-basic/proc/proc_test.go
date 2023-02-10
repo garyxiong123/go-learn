@@ -11,6 +11,7 @@ func TestProc(t *testing.T) {
 		println("rapUpListener")
 	})
 	proc.SetTimeToForceQuit(5)
+
 	proc.AddShutdownListener(func() {
 		println("gary shut down")
 	})
