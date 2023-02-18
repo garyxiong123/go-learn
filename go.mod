@@ -1,4 +1,4 @@
-module github.com/garyxiong123/go-learn
+module github.com/garyxiong123/go-learn/circus
 
 go 1.17
 
