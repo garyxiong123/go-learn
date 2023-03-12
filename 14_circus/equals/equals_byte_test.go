@@ -12,16 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cubic
+package equals
 
 import (
 	"encoding/json"
 	"github.com/consensys/gnark/frontend"
+	"testing"
+
+	"github.com/consensys/gnark/test"
 )
 
-// Circuit defines a simple circuit
-
-type Circuit struct {
+type Circuit_Byte struct {
 	// struct tags on a variable is optional
 	// default uses variable name and secret visibility.
 	X frontend.Variable `gnark:"x"`
@@ -33,15 +34,27 @@ type Circuit struct {
 // x**3 + x + 5 == y
 //1 x2 x3
 
-func (circuit *Circuit) Define(api frontend.API) error {
+func (circuit *Circuit_Byte) Define(api frontend.API) error {
 	x3 := api.Mul(circuit.X, circuit.X, circuit.X)
 	// x**3 + x + 5 == y
 
 	api.AssertIsEqual(circuit.Y, api.Add(x3, circuit.X, 5))
-	m := api.Cmp(x3, 5)
+
 	by, _ := json.Marshal("sss")
 
 	api.AssertIsEqual(x3, by)
-	println(m)
 	return nil
+}
+
+func Test_IS_Equals_Byte(t *testing.T) {
+
+	assert := test.NewAssert(t)
+
+	var cubicCircuit Circuit_Byte
+
+	assert.ProverSucceeded(&cubicCircuit, &Circuit{
+		X: 3,
+		Y: 35,
+	})
+
 }

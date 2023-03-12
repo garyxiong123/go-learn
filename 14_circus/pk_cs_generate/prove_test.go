@@ -1,4 +1,4 @@
-package circus
+package pk_cs_generate
 
 import (
 	"bytes"
@@ -12,13 +12,8 @@ import (
 	"testing"
 )
 
-func Test_Pk_Vk_Generate(t *testing.T) {
-
+func Test_Prove(t *testing.T) {
 	var circuit cubic.Circuit
-	circuit = cubic.Circuit{
-		33,
-		22,
-	}
 
 	// compile a circuit
 	vr1cs, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuit)
@@ -31,20 +26,27 @@ func Test_Pk_Vk_Generate(t *testing.T) {
 	newR1CS := groth16.NewCS(ecc.BN254)
 	_, _ = newR1CS.ReadFrom(&buf)
 
-	//var pk groth16_bn254.ProvingKey
-	//var vk groth16_bn254.VerifyingKey
-	// setup
 	pk, vk, _ := groth16.Setup(vr1cs)
 
 	println(pk)
 	println(vk)
 
-	ccsFile, err := os.Create(fmt.Sprintf("%s.ccs.save", "session"))
+	// ensure prove / verify works well with valid witnesses
+	valid_circuit := cubic.Circuit{
+		1,
+		7,
+	}
+
+	validWitness, err := frontend.NewWitness(&valid_circuit, ecc.BN254)
+
+	proof, err := groth16.Prove(newR1CS, pk, validWitness)
+
+	proof_file, err := os.Create(fmt.Sprintf("%s.txt", "proof"))
 	if err != nil {
 	}
 
-	vr1cs.WriteTo(ccsFile)
+	proof.WriteTo(proof_file)
 
-	_ = ccsFile.Close()
+	proof_file.Close()
 
 }

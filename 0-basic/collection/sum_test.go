@@ -1,6 +1,8 @@
 package collection
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSum(t *testing.T) {
 
@@ -12,4 +14,5 @@ func TestSum(t *testing.T) {
 	if want != got {
 		t.Errorf("got %d want %d given, %v", got, want, numbers)
 	}
+
 }
