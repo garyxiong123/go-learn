@@ -39,7 +39,7 @@ func Test_Constrain_Add_Variable_withError(t *testing.T) {
 	var circuitAddVariable CircuitVariable
 
 	// compile a circuit
-	vr1cs_Add_For, err := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuitAddVariable)
+	vr1cs_Add_For, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuitAddVariable)
 	println(err)
 	println(vr1cs_Add_For.GetNbConstraints())
 	println(vr1cs_Add_For.GetNbVariables()) //内部变量增加
@@ -52,7 +52,7 @@ func Test_Constrain_Add_Variable_Fix_Error(t *testing.T) {
 
 	circuitAddVariable.M = make([]frontend.Variable, 2)
 	// compile a circuit
-	vr1cs_Add_Variable, err := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuitAddVariable)
+	vr1cs_Add_Variable, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuitAddVariable)
 	println(err)
 	println(vr1cs_Add_Variable.GetNbConstraints())
 	println(vr1cs_Add_Variable.GetNbVariables()) //内部变量增加

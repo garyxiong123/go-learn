@@ -12,14 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cubic
+package variables
 
 import (
 	"github.com/consensys/gnark/frontend"
+	"testing"
+
+	"github.com/consensys/gnark/test"
 )
 
-// Circuit defines a simple circuit
-// x**3 + x + 5 == y
 type Circuit struct {
 	// struct tags on a variable is optional
 	// default uses variable name and secret visibility.
@@ -28,17 +29,33 @@ type Circuit struct {
 }
 
 // Define declares the circuit constraints
+
 // x**3 + x + 5 == y
+//1 x2 x3
+
 func (circuit *Circuit) Define(api frontend.API) error {
 	x3 := api.Mul(circuit.X, circuit.X, circuit.X)
+	// x**3 + x + 5 == y
+
 	api.AssertIsEqual(circuit.Y, api.Add(x3, circuit.X, 5))
+
+	circuit.X = 3
+
+	circuit.X = "211"
+
+	api.AssertIsEqual(x3, "123")
 	return nil
 }
 
-func SetCircuit() (circuit Circuit) {
-	circuit = Circuit{
-		X: 1,
-		Y: 7,
-	}
-	return circuit
+func Test_IS_Equals_String(t *testing.T) {
+
+	assert := test.NewAssert(t)
+
+	var cubicCircuit Circuit
+
+	assert.ProverSucceeded(&cubicCircuit, &Circuit{
+		X: 3,
+		Y: 35,
+	})
+
 }

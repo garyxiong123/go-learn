@@ -36,13 +36,13 @@ func Test_Constrain_Add_Factor(t *testing.T) {
 
 	// compile a circuit
 	//frontend.ToBinary(
-	vr1cs, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuit)
+	vr1cs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuit)
 	println(vr1cs.GetNbConstraints())
 	println(vr1cs.GetNbVariables())
 	var circuitAddFor CircuitAddFor
 
 	// compile a circuit
-	vr1cs_Add_For, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuitAddFor)
+	vr1cs_Add_For, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuitAddFor)
 	println(vr1cs_Add_For.GetNbConstraints())
 	println(vr1cs_Add_For.GetNbVariables()) //内部变量增加
 

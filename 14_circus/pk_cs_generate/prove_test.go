@@ -16,7 +16,7 @@ func Test_Prove(t *testing.T) {
 	var circuit cubic.Circuit
 
 	// compile a circuit
-	vr1cs, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuit)
+	vr1cs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuit)
 
 	// R1CS implements io.WriterTo and io.ReaderFrom
 	var buf bytes.Buffer
@@ -37,7 +37,7 @@ func Test_Prove(t *testing.T) {
 		7,
 	}
 
-	validWitness, err := frontend.NewWitness(&valid_circuit, ecc.BN254)
+	validWitness, err := frontend.NewWitness(&valid_circuit, ecc.BN254.ScalarField())
 
 	proof, err := groth16.Prove(newR1CS, pk, validWitness)
 

@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 
 	"github.com/fxamacker/cbor/v2"
 
@@ -16,13 +15,9 @@ import (
 
 func main() {
 	var circuit cubic.Circuit
-	circuit = cubic.Circuit{
-		33,
-		22,
-	}
 
 	// compile a circuit
-	_r1cs, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuit)
+	_r1cs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuit)
 
 	// R1CS implements io.WriterTo and io.ReaderFrom
 	var buf bytes.Buffer
@@ -40,7 +35,6 @@ func main() {
 	// but also gnarkio.WriterRawTo to serialize without point compression
 	buf.Reset()
 	_, _ = pk.WriteRawTo(&buf)
-	fmt.Println(buf)
 	newPK := groth16.NewProvingKey(ecc.BN254)
 	_, _ = newPK.ReadFrom(&buf)
 

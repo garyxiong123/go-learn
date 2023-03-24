@@ -15,10 +15,8 @@
 package mimc
 
 import (
-	"fmt"
 	"github.com/consensys/gnark/frontend"
 	"github.com/consensys/gnark/std/hash/mimc"
-	"github.com/rs/zerolog/log"
 )
 
 // Circuit defines a pre-image knowledge proof
@@ -40,11 +38,6 @@ func (circuit *Circuit) Define(api frontend.API) error {
 	// mimc(preImage) == hash
 	mimc.Write(circuit.PreImage)
 	api.AssertIsEqual(circuit.Hash, mimc.Sum())
-
-	api.Println(123, 111)
-	log.Print("66666")
-	//api.Println("sss")
-	fmt.Println("garygary------")
 
 	return nil
 }

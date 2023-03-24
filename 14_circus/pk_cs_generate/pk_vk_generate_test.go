@@ -7,21 +7,61 @@ import (
 	"github.com/consensys/gnark/backend/groth16"
 	"github.com/consensys/gnark/frontend"
 	"github.com/consensys/gnark/frontend/cs/r1cs"
-	"github.com/garyxiong123/go-learn/circus/examples/cubic"
 	"os"
 	"testing"
 )
 
+// Circuit defines a simple circuit
+// x**3 + x + 5 == y
+type Circuit struct {
+	// struct tags on a variable is optional
+	// default uses variable name and secret visibility.
+	X frontend.Variable `gnark:"x"`
+	Y frontend.Variable `gnark:",public"`
+	Z frontend.Variable `gnark:",public"`
+}
+
+// Define declares the circuit constraints
+// x**3 + x + 5 == y
+func (circuit *Circuit) Define(api frontend.API) error {
+	x3 := api.Mul(circuit.X, circuit.X, circuit.X)
+	api.AssertIsEqual(circuit.Y, api.Add(x3, circuit.X, 5))
+	return nil
+}
+
+func SetCircuit() (circuit Circuit) {
+	circuit = Circuit{
+		X: 1,
+		Y: 7,
+	}
+	return circuit
+}
+
 func Test_Pk_Vk_Generate(t *testing.T) {
 
-	var circuit cubic.Circuit
-	circuit = cubic.Circuit{
-		33,
-		22,
-	}
+	var circuit Circuit
 
 	// compile a circuit
-	vr1cs, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuit)
+	vr1cs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuit)
+
+	pk, vk, _ := groth16.Setup(vr1cs)
+
+	vk_file, err := os.Create(fmt.Sprintf("%s.txt", "vk_Input_1"))
+	if err != nil {
+	}
+	vk.ExportSolidity(vk_file)
+
+	circuit = SetCircuit()
+	validWitness, err := frontend.NewWitness(&circuit, ecc.BN254.ScalarField())
+	inputs, err := frontend.NewWitness(&circuit, ecc.BN254.ScalarField(), frontend.PublicOnly())
+	proof, err := groth16.Prove(vr1cs, pk, validWitness)
+
+	err = groth16.Verify(proof, vk, inputs)
+	if err != nil {
+	}
+
+	println(pk)
+	println(vk)
 
 	// R1CS implements io.WriterTo and io.ReaderFrom
 	var buf bytes.Buffer
@@ -31,14 +71,6 @@ func Test_Pk_Vk_Generate(t *testing.T) {
 	newR1CS := groth16.NewCS(ecc.BN254)
 	_, _ = newR1CS.ReadFrom(&buf)
 
-	pk, vk, _ := groth16.Setup(vr1cs)
-
-	validWitness, err := frontend.NewWitness(&circuit, ecc.BN254)
-	proof, err := groth16.Prove(vr1cs, pk, validWitness)
-
-	println(pk)
-	println(vk)
-
 	ccsFile, err := os.Create(fmt.Sprintf("%s.txt", "constraint"))
 	if err != nil {
 	}
@@ -47,9 +79,6 @@ func Test_Pk_Vk_Generate(t *testing.T) {
 	if err != nil {
 	}
 
-	vk_file, err := os.Create(fmt.Sprintf("%s.txt", "vk"))
-	if err != nil {
-	}
 	proof_file, err := os.Create(fmt.Sprintf("%s.txt", "proof"))
 	if err != nil {
 	}
@@ -58,7 +87,7 @@ func Test_Pk_Vk_Generate(t *testing.T) {
 
 	pk.WriteTo(pk_file)
 
-	vk.WriteTo(vk_file)
+	//vk.WriteTo(vk_file)
 
 	proof.WriteRawTo(proof_file)
 
