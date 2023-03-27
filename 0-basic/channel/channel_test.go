@@ -27,7 +27,7 @@ func sum(s []int, c chan int) {
 func Test_chan(t *testing.T) {
 	maxCollectionId := 1 << 16
 	println(maxCollectionId)
-	fmt.Printf("", num)
+	//fmt.Printf("", num)
 	s := []int{7, 2, 8, -9, 4, 0}
 
 	c := make(chan int)
@@ -38,7 +38,8 @@ func Test_chan(t *testing.T) {
 	fmt.Println(x, y, x+y)
 }
 
-/**
+/*
+*
 带缓冲区的通道允许发送端的数据发送和接收端的数据获取处于异步状态，就是说发送端发送的数据可以放在缓冲区里面，可以等待接收端去获取数据，而不是立刻需要接收端去获取数据。
 
 不过由于缓冲区的大小是有限的，所以还是必须有接收端来接收数据的，否则缓冲区一满，数据发送端就无法再发送数据了。

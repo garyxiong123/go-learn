@@ -2,12 +2,14 @@ package extend
 
 import (
 	"fmt"
+	"math/big"
 	"testing"
 )
 
 type person struct {
-	name string
-	age  int64
+	name   string
+	age    int64
+	amount big.Int
 }
 
 type teacher1 struct {
@@ -37,6 +39,7 @@ func Test_1(t *testing.T) {
 		name: "gary",
 		age:  33,
 	}
+
 	p.sayHello("boy")
 	println(p)
 }
