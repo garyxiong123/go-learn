@@ -1,4 +1,4 @@
-module github.com/garyxiong123/go-learn/basic/amount
+module github.com/garyxiong123/go-learn/basic1/amount
 
 go 1.17
 
