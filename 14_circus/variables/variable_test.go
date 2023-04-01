@@ -16,6 +16,7 @@ package variables
 
 import (
 	"github.com/consensys/gnark/frontend"
+	"math/big"
 	"testing"
 
 	"github.com/consensys/gnark/test"
@@ -43,6 +44,10 @@ func (circuit *Circuit) Define(api frontend.API) error {
 
 	circuit.X = "211"
 
+	//circuit.X = big.NewInt(1233333333333333888888888888888)
+
+	circuit.X, _ = new(big.Int).SetString("10000000000000000000000000", 10)
+	circuit.Y, _ = new(big.Int).SetString("1000000000000000000000111100000000000000000000000000000000000000000000000000000000000001111000000000000000000000000000000000000111100000000000000000000000000000000000000000000000000000000000000000000", 10)
 	api.AssertIsEqual(x3, "123")
 	return nil
 }

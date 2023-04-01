@@ -4,9 +4,11 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/garyxiong123/go-learn/eth_learn_eth/bep20"
+	"github.com/garyxiong123/go-learn/eth_learn_eth/util"
 	"log"
 	"math/big"
 	"testing"
@@ -17,12 +19,21 @@ func Test_Deploy_Bep20(t *testing.T) {
 	if err != nil {
 	}
 	client, err := ethclient.Dial("https://bsc-testnet.nodereal.io/v1/a1cee760ac744f449416a711f20d99dd")
-	var InitialSupply = utils.ToIntByPrecise("5", 22)
-	addr, tx, bep29, err := bep20.DeployBep20(transactOpts, client, InitialSupply, "name-gary", "symbol-gary")
+	var InitialSupply = util.ToIntByPrecise("5", 22)
+	addr, tx, bep20, err := bep20.DeployBep20(transactOpts, client, InitialSupply, "name-gary", "symbol-gary")
 
+	//transfer from to
+	transactOpts1, err := BuildDefaultTransactOpts()
+	tx, err = bep20.Transfer(transactOpts1, common.HexToAddress("0x4909d4D440E8ffF61738E8Cb7b2b0a4aaFF7b896"), util.ToIntByPrecise("5", 18))
+	if err != nil {
+
+	}
+
+	//bep20.Approve()
+	log.Print(tx)
 	log.Print(addr)
 	log.Print(tx)
-	log.Print(bep29)
+	log.Print(bep20)
 	log.Print(err)
 
 }

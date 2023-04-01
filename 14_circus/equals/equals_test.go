@@ -42,7 +42,7 @@ func Test_IS_Equals(t *testing.T) {
 
 	// compile a circuit
 	//frontend.ToBinary(
-	vr1cs, _ := frontend.Compile(ecc.BN254, r1cs.NewBuilder, &circuit)
+	vr1cs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &circuit)
 	println(vr1cs.GetNbConstraints())
 	println(vr1cs.GetNbVariables())
 
