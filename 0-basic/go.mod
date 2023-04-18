@@ -1,6 +1,6 @@
 module github.com/garyxiong123/go-learn/basic
 
-go 1.17
+go 1.18
 
 require github.com/garyxiong123/go-learn v0.0.0-20230131184926-3e096f2ff517
 

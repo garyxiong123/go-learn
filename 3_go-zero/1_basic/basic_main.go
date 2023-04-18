@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"github.com/garyxiong123/go-learn/web/go-zero/basic/internal/config"
@@ -23,6 +24,10 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	ctx := svc.NewServiceContext(c)
+
+	parentCtx := context.Background()
+	ctx = context.WithValue(parentCtx, "key", "value")
+	ctx = context.WithValue(parentCtx, "key1", "value1")
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
 
