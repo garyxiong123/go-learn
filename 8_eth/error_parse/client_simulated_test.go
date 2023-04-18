@@ -3,16 +3,18 @@ package main
 import (
 	"context"
 	"fmt"
-	"strings"
-
-	"github.com/bnb-chain/zkbnb-eth-rpc/zkbnb"
+	zkbnb "github.com/bnb-chain/zkbnb-eth-rpc/core"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"strings"
+	"testing"
 )
 
-// github.com/bnb-chain/zkbnb-eth-rpc => github.com/15000785133/zkbnb-eth-rpc v0.0.3-0.20230403192823-23498c95979c
-func main() {
+// github.com
+// /bnb-chain/zkbnb-eth-rpc => github.com/15000785133/zkbnb-eth-rpc v0.0.3-0.20230403192823-23498c95979c
+func TestName(t *testing.T) {
+
 	client, err := ethclient.Dial("https://bsc-testnet.nodereal.io/v1/a1cee760ac744f449416a711f20d99dd")
 	if err != nil {
 		panic(err)
@@ -27,13 +29,13 @@ func main() {
 
 	if receipt.Status == 0 {
 		fmt.Println("Transaction was reverted")
-		ZkBNBContractAbi, _ = abi.JSON(strings.NewReader(zkbnb.ZkBNBMetaData.ABI))
+		ZkBNBContractAbi, _ := abi.JSON(strings.NewReader(zkbnb.ZkBNBMetaData.ABI))
 
-		// Get the contract ABI
-		contractAbi, err := abi.JSON(strings.NewReader(ZkBNBContractAbi))
-		if err != nil {
-			panic(err)
-		}
+		//// Get the contract ABI
+		//contractAbi, err := abi.JSON(strings.NewReader(ZkBNBContractAbi))
+		//if err != nil {
+		//	panic(err)
+		//}
 
 		// Get the function signature of the failed function call
 		signature := receipt.Logs[0].Topics[0].Hex()
@@ -42,7 +44,7 @@ func main() {
 		inputData := receipt.Logs[0].Data
 
 		// Parse the function signature and input data
-		parsed, err := contractAbi.Unpack(signature, inputData)
+		parsed, err := ZkBNBContractAbi.Unpack(signature, inputData)
 		if err != nil {
 			panic(err)
 		}
