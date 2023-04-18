@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/bnb-chain/zkbnb-eth-rpc/zkbnb"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
+// github.com/bnb-chain/zkbnb-eth-rpc => github.com/15000785133/zkbnb-eth-rpc v0.0.3-0.20230403192823-23498c95979c
 func main() {
 	client, err := ethclient.Dial("https://bsc-testnet.nodereal.io/v1/a1cee760ac744f449416a711f20d99dd")
 	if err != nil {
@@ -25,9 +27,10 @@ func main() {
 
 	if receipt.Status == 0 {
 		fmt.Println("Transaction was reverted")
+		ZkBNBContractAbi, _ = abi.JSON(strings.NewReader(zkbnb.ZkBNBMetaData.ABI))
 
 		// Get the contract ABI
-		contractAbi, err := abi.JSON(strings.NewReader(CONTRACT_ABI))
+		contractAbi, err := abi.JSON(strings.NewReader(ZkBNBContractAbi))
 		if err != nil {
 			panic(err)
 		}
